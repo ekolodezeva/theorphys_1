@@ -11,6 +11,8 @@
 \usepackage{tensor}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 
+\usepackage{hyperref}
+
 \author{
   Колодезева Екатерина\\
   \texttt{kolodezeva.ed@phystech.edu}
@@ -22,7 +24,7 @@
 \maketitle
 
 \begin{abstract}
-  Данный документ представляет собой конспект лекций по семестровому курсу теории поля в МФТИ, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ. На достоверность изложения и отсутствие ошибок не претендует.
+  Данный документ представляет собой конспект лекций по семестровому курсу теории поля в МФТИ, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ. На достоверность изложения и отсутствие ошибок не претендует. Последняя версия документа доступна по ссылке \url{https://github.com/ekolodezeva/theorphys_1}.
 \end{abstract}
  
 \tableofcontents
@@ -78,7 +80,7 @@
     \end{cases}
 \end{equation}
 
-Система переопределена: она содержит 8 уравнений и 6 неизвестных ($\vec{E} и \vec{H}$
+Система переопределена: она содержит 8 уравнений и 6 неизвестных ($\vec{E}$ и $\vec{H}$
 ), её уравнения неинвариантны относительно преобразования Лоренца. В последующих лекциях будет проведена замена переменных
 
 \begin{equation}
@@ -100,6 +102,88 @@
 Уравнения \eqref{eq:maxwell_a} инвариантны относительно преобразований Лоренца.
 
 \subsection{Преобразование координат}
+
+Рассмотрим две системы отсчёта. Система $K'$ для наблюдателя покоится, система $K$ движется относительно её со скоростью $v$, направленной вдоль оси $x$. Тогда координаты точки в системе отсчёта $K'$ зависят от её координат в системе отсчёта $K$ следующим образом:
+
+\begin{equation}\label{eq:lorentz_coord}
+    \begin{cases}
+    x'=\frac{x-vt}{\sqrt{1-\frac{v^2}{c^2}}}=\gamma\left(x-vt\right)\\
+    t'=\frac{t-vx/c^2}{\sqrt{1-\frac{v^2}{c^2}}}=\gamma\left(t-vx/c^2\right)\\
+    y'=y\\
+    z'=z
+    \end{cases}
+\end{equation}
+
+
+Преобразование Лоренца — это поворот в псевдоевклидовом четырёхмерном пространстве Минковского. В пространстве Минковского расстояние между двумя точками $\left(\vec{r_1}, t_1\right)$ и $\left(\vec{r_2}, t_2\right)$ называется интервалом и задаётся формулой
+\begin{equation}
+    S_12=c^2\left(t_1-t_2\right)^2-\left(\vec{r_1}-\vec{r_2}\right)^2
+\end{equation}
+
+Матрицу преобразования только одной координаты и времени легко получить как матрицу поворота, сохраняющую метрику в пространстве Минковского из следующей системы уравнений:
+
+\begin{equation}\label{eq:lorentz_x}
+    \begin{cases}
+    dx'=Adx+Bdt\\
+    dt'=Ddx+Fdt\\
+    c^2dt'^2-dx'^2=c^2dt^2-dx^2
+    \end{cases}
+\end{equation}
+
+Подставив первые два уравнения в третье, получаем
+
+\begin{equation*}
+    c^2\left(Dx+Fdt\right)^2-\left(Adx+Bdt\right)^2=c^2dt^2-dx^2
+\end{equation*}
+\begin{equation*}
+    c^2D^2dx^2+c^2F^2dt^2+2c^2DFdxdt-A^2dx^2-B^2dt^2-2ABdxdt=c^2dt^2-dx^2
+\end{equation*}
+\begin{equation*}
+    dx^2\left(c^2D^2-A^2+1\right)^2+dt^2\left(c^2F^2-B^2-c^2\right)^2+2dxdt\left(DF-AB\right)=0
+\end{equation*}
+
+\begin{equation}\label{eq:lorentz_param}
+    \begin{cases}
+    c^2D^2=A^2-1\\
+    B^2=c^2\left(F^2-1\right)\\
+    c^2DF=AB
+    \end{cases}
+\end{equation}
+
+Система \eqref{eq:lorentz_param} содержит 3 уравнения и четыре неизвестных параметра $A, B, D, F$. Добавим необходимое уравнение, введя известный параметр $v$:
+
+\begin{equation*}
+    B=FV
+\end{equation*}
+
+Решая систему, получаем
+
+\begin{equation*}
+    F^2V^2=c^2\left(F^2-1\right) \implies F=\frac{1}{\sqrt{V^2-c^2}}
+\end{equation*}
+\begin{equation*}
+    B=FV=\frac{V}{\sqrt{V^2-c^2}}
+\end{equation*}
+\begin{equation*}
+    \begin{cases}
+    V=\frac{B}{F}=\frac{c^2D}{A} \implies D=\frac{AV}{c^2}\\
+    c^2D^2=A^2-1 \implies \frac{A^2V^2}{c^2}=A^2-1 \implies A=\frac{1}{\sqrt{V^2-c^2}}
+    \end{cases}
+\end{equation*}
+\begin{equation*}
+    D=\frac{AV}{c^2}=\frac{V/c^2}{\sqrt{V^2-c^2}}
+\end{equation*}
+
+Итоговый вид преобразования \eqref{eq:lorentz_x}:
+
+\begin{equation*}
+    \begin{cases}
+    dx'=\frac{1}{\sqrt{V^2-c^2}}\big(dx+Vdt\big)\\
+    dt'=\frac{1}{\sqrt{V^2-c^2}}\big(\frac{V}{c^2}dx+dt\big)
+    \end{cases}
+\end{equation*}
+
+Видно, что физический смысл переменной $V$ — это введённая выше относительная скорость $v$ систем отсчёта $K$ и $K'$.
 
 ...
 
