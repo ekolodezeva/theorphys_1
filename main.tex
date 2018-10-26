@@ -6,38 +6,218 @@
 \usepackage{hyphenat}
 \hyphenation{ма-те-ма-ти-ка вос-ста-нав-ли-вать}
 
-\usepackage[T1]{fontenc}
-\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tensor}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 
 \author{
   Колодезева Екатерина\\
   \texttt{kolodezeva.ed@phystech.edu}
 }
-\title{Теория поля, Воронов, 2018/19}
+\title{Теория поля (Воронов) 2018/19}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  Данный документ представляет собой конспект лекций по семестровому курсу теории поля, прочитанному на лекциях в МФТИ Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ.
+  Данный документ представляет собой конспект лекций по семестровому курсу теории поля в МФТИ, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ. На достоверность изложения и отсутствие ошибок не претендует.
 \end{abstract}
  
 \tableofcontents
  
-\section{Предисловие}
- Этот текст будет на русском языке. Это демонстрация того, что символы кириллицы
- в сгенерированном документе (Compile to PDF) отображаются правильно.
- Для этого Вы должны установить нужный  язык (russian) 
-и необходимую кодировку шрифта (T2A).
+\section{Вступление}
  
-\section{Математические формулы}
-Кириллические символы также могут быть использованы в математическом режиме.
- 
-\begin{equation}
-  S_\textup{ис} = S_{123}
+\subsection{Теория Ньютона}
+
+В инерциальных системах отсчёта выполняются законы Ньютона. В предположениях законов Ньютона взаимодействие распространяется мгновенно, что видно из уравнений кулоновского и гравитационного притяжения:
+
+\begin{equation*}
+    m_a \frac{d^2\vec r_a}{dt^2}= \sum_{b}\frac{q_a q_b}{\abs{\vec r_a - \vec r_b}^3}(\vec r_a - \vec r_b)
+\end{equation*}
+
+\begin{equation*}
+    m_a \frac{d^2\vec r_a}{dt^2}= G \sum_{b}\frac{m_a m_b}{\abs{\vec r_a - \vec r_b}^3}(\vec r_b - \vec r_a)
+\end{equation*}
+
+Преобразование координат при переходе между системами отсчёта в механике Ньютона в векторной и тензорной записях:
+
+\begin{equation}\label{eq:newton}
+    \begin{split}
+        \vec r' = R\vec r+\vec vt+\vec r_0,\quad t'=t+t_0\\
+        r_a' = \sum_{b} R_{ab}r_a+v_at+r_{0a},\quad t'=t+t_0,\\
+        \textup{R — ортогональная матрица}
+    \end{split}
 \end{equation}
 
-\author{Колодезева Екатерина, гр. 635}
- 
+Рассмотрим некоторые частные случаи \eqref{eq:newton}:
+\begin{enumerate}
+    \item Однородность пространства и времени в механике Ньютона: пусть $R=I, \vec{v}=\vec{0}$. Тогда $\vec{r}'=\vec{r}+\vec{r_0}, t'=t+t_0$.
+    \item Изотропность пространства (поворот): пусть $R\neq{I}, \vec{v}=\vec{0}, t_0=0$. Тогда $\vec{r}'=R\vec{r}$, $t'=t$.
+    \item Преобразование Галилея: пусть $R=I, \vec{r_0}=\vec{0}, t_0=0$. Тогда $\vec{r}'=\vec{r}+\vec{v}t, t'=t$.
+\end{enumerate}
+
+Принцип относительности систем отсчёта в классической механике гласит, что все системы отсчёта равноправны.
+
+%chapter
+\section{Кинематика в специальной теории относительности}
+
+\subsection{Принцип относительности Эйнштейна}
+
+Принцип относительности Эйнштейна гласит, что и в электродинамике законы природы одни и те же для всех систем отсчёта. На замену преобразованию Галилея приходит преобразование Лоренца.
+
+Знакомые уравнения электродинамики будут заменой переменных переведены к виду, иллюстрирующему этот принцип. Рассмотрим систему уравнений Максвелла:
+
+\begin{equation}\label{eq:maxwell}
+    \begin{cases}
+    div\vec{E}=4\pi\rho\\
+    div\vec{H}=0\\
+    rot\vec{E}=-\frac{1}{c}\frac{\partial\vec{H}}{\partial t}\\
+    rot\vec{H}=\frac{1}{c}\frac{\partial\vec{E}}{\partial t}+\frac{4\pi}{c}\vec{j}
+    \end{cases}
+\end{equation}
+
+Система переопределена: она содержит 8 уравнений и 6 неизвестных ($\vec{E} и \vec{H}$
+), её уравнения неинвариантны относительно преобразования Лоренца. В последующих лекциях будет проведена замена переменных
+
+\begin{equation}
+    \begin{cases}
+    \vec{H}=rot\vec{A}\\
+    \vec{E}=-\frac{1}{c}\frac{\partial\vec{A}}{\partial t}-\nabla\varphi
+    \end{cases}
+\end{equation}
+
+С помощью этой замены уравнения \eqref{eq:maxwell} перейдут в систему из 4 уравнений с 4 неизвестными $\varphi,\vec{A}$:
+
+\begin{equation}\label{eq:maxwell_a}
+    \begin{cases}
+    \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\vec{A}-\Delta\vec{A}=\frac{4\pi}{v}\vec{j}\\
+    \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\varphi-\Delta\varphi=4\pi\rho
+    \end{cases}
+\end{equation}
+
+Уравнения \eqref{eq:maxwell_a} инвариантны относительно преобразований Лоренца.
+
+\subsection{Преобразование координат}
+
+...
+
+\subsection{Преобразование скорости}
+
+...
+
+\subsection{Элементы векторного анализа}
+
+...
+
+\subsection{Лагранжиан и действие для свободной точечной релятивистской частицы}
+
+...
+
+%chapter
+\section{Заряд в электромагнитном поле}
+
+\subsection{Векторный потенциал электромагнитного поля}
+
+...
+
+\begin{equation}\label{eq:fmatrix}
+    \tensor{F}{^i^k} =
+    \begin{pmatrix}
+        0 & -E_x & -E_y & -E_z \\
+        E_x & 0 & -H_z & H_y \\
+        E_y & H_z & 0 & -H_x \\
+        E_z & -H_y & H_x & 0
+    \end{pmatrix}
+\end{equation}
+
+\subsection{Взаимодействие заряженных релятивистских частиц в электромагнитном поле}
+
+...
+
+Вариация действия на минимальном пути равна нулю, значит, равно нулю и подынтегральное выражение. Получаем уравнение движения частицы во внешнем электромагнитном поле:
+
+\begin{equation}\label{eq:movement}
+    mc\frac{d\tensor{u}{^i}}{ds}=\frac{e}{c}\tensor{F}{^i^k}\tensor{u}{_k}
+\end{equation}
+
+Полученное тензорное уравнение содержит в себе четыре скалярных уравнения и четыре неизвестных $\tensor{u}{^i}$. Ранее мы выяснили, что 
+
+\begin{equation}\label{eq:velnorm}
+    \tensor{\eta}{_i_k}\tensor{u}{^i}\tensor{u}{^k}=1
+\end{equation}
+
+Убедимся, что это уравнение не противоречит системе уравнений \eqref{eq:movement} и не переопределяет её. Продифференцируем его по $ds$:
+
+\begin{equation*}
+    \begin{split}
+        \frac{d}{ds}\big(\tensor{\eta}{_i_k}\tensor{u}{^i}\tensor{u}{^k}\big)=\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}+\tensor{\eta}{_i_k}\tensor{u}{^i}\frac{d\tensor{u}{^k}}{ds}=\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}+\tensor{\eta}{_k_i}\tensor{u}{^k}\frac{d\tensor{u}{^i}}{ds}=\\
+        =2\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}=2\frac{d\tensor{u}{^i}}{ds}\tensor{u}{_i}=0
+    \end{split}
+\end{equation*}
+
+Подставляя выражение для $d\tensor{u}{^i}/ds$ из \eqref{eq:movement} с учётом равенства нулю свёртки антисимметричного тензора $\tensor{F}{^i^k}$ и симметричного тензора $\tensor{u}{_k}\tensor{u}{_i}$, получаем
+
+\begin{equation*}
+    \frac{d\tensor{u}{^i}}{ds}\tensor{u}{_i}=\frac{e}{mc^2}\tensor{F}{^i^k}\tensor{u}{_k}\tensor{u}{_i}=0 
+\end{equation*}
+
+Таким образом, условие \eqref{eq:velnorm} не противоречит и не переопределяет систему уравнений \eqref{eq:movement}.
+
+Получим из \eqref{eq:movement} уравнения движения частицы в трёхмерных координатах, подставив вместо $\tensor{F}{^i^k}$ компоненты полей $\vec{E}$ и $\vec{H}$ в соответствии с \eqref{eq:fmatrix}:
+
+\begin{equation*}
+    mc\frac{d\tensor{u}{^0}}{ds}=\frac{d\left(mc\tensor{u}{^0}\right)}{ds}=\frac{d\left(\varepsilon/c\right)}{ds}=\frac{1}{c}\frac{d\varepsilon}{dt}\frac{dt}{ds}=\Biggm\lvert\frac{ds}{dt}=\frac{\sqrt{c^2dt^2-d\vec{r}^2}}{dt}=\sqrt{c^2-v^2}=\frac{c}{\gamma}\Biggm\rvert=\frac{\gamma}{c^2}\frac{d\varepsilon}{dt}=
+\end{equation*}
+\begin{equation*}
+    =\frac{e}{c}\tensor{F}{^0^k}\tensor{u}{_k}=\frac{e}{c}\big(\tensor{F}{^0^0}\tensor{u}{_0}-\tensor{F}{^0^\alpha}\tensor{u}{_\alpha}\big)    =-\frac{e}{c}\left(-E_\alpha\right)\frac{v_\alpha\gamma}{c}=\frac{\gamma e}{c^2}\left(\vec{E}\vec{v}\right)
+\end{equation*}
+
+\begin{equation}\label{eq:emovement}
+    \frac{d\varepsilon}{dt}=e\left(\vec{E}\vec{v}\right)
+\end{equation}
+
+\begin{equation*}
+    mc\frac{d\tensor{u}{^\alpha}}{ds}=\frac{d\left(mc\tensor{u}{^\alpha}\right)}{ds}=\frac{dp}{ds}=\frac{\gamma}{c}\frac{dp}{dt}=\frac{e}{c}\tensor{F}{^\alpha^k}\tensor{u}{_k}=\frac{e}{c}\big(\tensor{F}{^\alpha^0}\tensor{u}{_0}-\tensor{F}{^\alpha^\beta}\tensor{u}{_\beta}\big)=
+\end{equation*}
+\begin{equation*}
+    =\frac{e}{c}\big(E_\alpha\gamma-\tensor{e}{_\gamma_\alpha_\beta}\tensor{H}{_\alpha}\tensor{v}{_\beta}\frac{\gamma}{c}\big)=\frac{\gamma}{c}\big(eE_\alpha+\frac{e}{c}\left(\lbrack\vec{v}\times\vec{H}\rbrack\right)_\alpha\big)
+\end{equation*}
+
+\begin{equation}\label{eq:hmovement}
+    \frac{dp}{dt}=e\vec{E}+\frac{e}{c}\lbrack\vec{v}\times\vec{H}\rbrack
+\end{equation}
+
+Система уравнений \eqref{eq:emovement}, \eqref{eq:hmovement} эквивалентна уравнению \eqref{eq:movement}.
+
+\subsection{Преобразование Лоренца для полей}
+
+Тензор электромагнитного поля
+
+\begin{equation}
+    \tensor{F}{^i^k} =
+    \begin{pmatrix}
+        0 & -E_x & -E_y & -E_z \\
+        E_x & 0 & -H_z & H_y \\
+        E_y & H_z & 0 & -H_x \\
+        E_z & -H_y & H_x & 0
+    \end{pmatrix}
+\end{equation}
+
+Ковариантный вектор преобразуется по правилу $x^{i'}=\tensor{\Lambda}{^{i'}_{i}} x^i$. Значит, дважды ковариантный тензор $\tensor{F}{^i^k}$ преобразуется как $\tensor{F}{^{i'}^{k'}}=\tensor{\Lambda}{^{i'}_{k'}}\tensor{\Lambda}{^{k'}_{k}} \tensor{F}{^i^k}$.
+
+...
+
+\subsection{Теорема Пойнтинга — Умова}
+
+...
+
+%chapter
+\section{Постоянное электромагнитное поле}
+
+\subsection{Электрическое поле}
+
+...
+
 \end{document}
