@@ -75,8 +75,8 @@
     \begin{cases}
     div\vec{E}=4\pi\rho\\
     div\vec{H}=0\\
-    rot\vec{E}=-\frac{1}{c}\frac{\partial\vec{H}}{\partial t}\\
-    rot\vec{H}=\frac{1}{c}\frac{\partial\vec{E}}{\partial t}+\frac{4\pi}{c}\vec{j}
+    rot\vec{E}=-\dfrac{1}{c}\dfrac{\partial\vec{H}}{\partial t}\\
+    rot\vec{H}=\dfrac{1}{c}\dfrac{\partial\vec{E}}{\partial t}+\dfrac{4\pi}{c}\vec{j}
     \end{cases}
 \end{equation}
 
@@ -86,7 +86,7 @@
 \begin{equation}
     \begin{cases}
     \vec{H}=rot\vec{A}\\
-    \vec{E}=-\frac{1}{c}\frac{\partial\vec{A}}{\partial t}-\nabla\varphi
+    \vec{E}=-\dfrac{1}{c}\dfrac{\partial\vec{A}}{\partial t}-\nabla\varphi
     \end{cases}
 \end{equation}
 
@@ -94,8 +94,8 @@
 
 \begin{equation}\label{eq:maxwell_a}
     \begin{cases}
-    \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\vec{A}-\Delta\vec{A}=\frac{4\pi}{v}\vec{j}\\
-    \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\varphi-\Delta\varphi=4\pi\rho
+    \dfrac{1}{c^2}\dfrac{\partial^2}{\partial t^2}\vec{A}-\Delta\vec{A}=\dfrac{4\pi}{v}\vec{j}\\
+    \dfrac{1}{c^2}\dfrac{\partial^2}{\partial t^2}\varphi-\Delta\varphi=4\pi\rho
     \end{cases}
 \end{equation}
 
@@ -107,8 +107,8 @@
 
 \begin{equation}\label{eq:lorentz_coord}
     \begin{cases}
-    x'=\frac{x-vt}{\sqrt{1-\frac{v^2}{c^2}}}=\gamma\left(x-vt\right)\\
-    t'=\frac{t-vx/c^2}{\sqrt{1-\frac{v^2}{c^2}}}=\gamma\left(t-vx/c^2\right)\\
+    x'=\dfrac{x-vt}{\sqrt{1-\frac{v^2}{c^2}}}=\gamma\left(x-vt\right)\\
+    t'=\dfrac{t-vx/c^2}{\sqrt{1-\frac{v^2}{c^2}}}=\gamma\left(t-\dfrac{v}{c^2}x\right)\\
     y'=y\\
     z'=z
     \end{cases}
@@ -119,7 +119,7 @@
 \begin{equation}
     \begin{cases}
     x=\gamma\left(x'+vt'\right)\\
-    t=\gamma\left(t'+vx'/c^2\right)\\
+    t=\gamma\left(t'+\dfrac{v}{c^2}x'\right)\\
     y=y'\\
     z=z'
     \end{cases}
@@ -176,8 +176,8 @@
 \end{equation*}
 \begin{equation*}
     \begin{cases}
-    V=\frac{B}{F}=\frac{c^2D}{A} \implies D=\frac{AV}{c^2}\\
-    c^2D^2=A^2-1 \implies \frac{A^2V^2}{c^2}=A^2-1 \implies A=\frac{1}{\sqrt{V^2-c^2}}
+    V=\dfrac{B}{F}=\dfrac{c^2D}{A} \implies D=\dfrac{AV}{c^2}\\
+    c^2D^2=A^2-1 \implies \dfrac{A^2V^2}{c^2}=A^2-1 \implies A=\dfrac{1}{\sqrt{V^2-c^2}}
     \end{cases}
 \end{equation*}
 \begin{equation*}
@@ -188,8 +188,8 @@
 
 \begin{equation*}
     \begin{cases}
-    dx'=\frac{1}{\sqrt{V^2-c^2}}\big(dx+Vdt\big)\\
-    dt'=\frac{1}{\sqrt{V^2-c^2}}\big(\frac{V}{c^2}dx+dt\big)
+    dx'=\dfrac{1}{\sqrt{V^2-c^2}}\big(dx+Vdt\big)\\
+    dt'=\dfrac{1}{\sqrt{V^2-c^2}}\big(\dfrac{V}{c^2}dx+dt\big)
     \end{cases}
 \end{equation*}
 
@@ -200,7 +200,7 @@
 \begin{equation*}
     \begin{cases}
     x'=\gamma\left(x-vt\right)\\
-    t'=\gamma\left(t-vx/c^2\right)\\
+    t'=\gamma\left(t-\dfrac{v}{c^2}x\right)\\
     y'=y\\
     z'=z
     \end{cases}
@@ -254,7 +254,7 @@
     \begin{cases}
     \Delta S_{12}^2=\Delta S_{1'2'}^2\\
     \Delta S_{1'2'}^2=c^2\Delta t'^2\\
-    \Delta S_{12}^2=c^2\Delta t^2-\Delta x^2=c^2\Delta t^2-v^2\Delta t^2=c^2\Delta t^2\big(1-\frac{v^2}{c^2}\big)
+    \Delta S_{12}^2=c^2\Delta t^2-\Delta x^2=c^2\Delta t^2-v^2\Delta t^2=c^2\Delta t^2\big(1-\dfrac{v^2}{c^2}\big)
     \end{cases}
     \implies \Delta t=\gamma\Delta t'
 \end{equation*}
@@ -292,18 +292,18 @@
     \begin{equation*}
         \begin{cases}
         \Delta S'^2 > 0 \implies |c\Delta t'| > |\Delta x'|\\
-        \Delta x=0=\gamma\left(\Delta x'+v\Delta t'\right) \implies c\Delta t'=-\Delta x'\frac{c}{v}
+        \Delta x=0=\gamma\left(\Delta x'+v\Delta t'\right) \implies c\Delta t'=-\Delta x'\dfrac{c}{v}
         \end{cases}
     \end{equation*}
     \begin{equation*}
         \implies |c\Delta t'|=|-\Delta x'\frac{c}{v}|>|\Delta x'| \implies |v|<c
     \end{equation*}
-    Условие $v<c$ справедливо для любой скорости, значит, такая система отсчёта существует.
+    Условие $v<c$ справедливо для любой скорости реальной частицы, значит, такая система отсчёта существует.
     \item $\Delta S'^2 < 0$ -- пространственноподобный интервал. При таком интервале существует система отсчёта, в котором события произошли одновременно (покоящаяся в $K'$ линейка): $\Delta t=0$. Аналогично рассуждениям выше получаем
     \begin{equation*}
         \begin{cases}
         \Delta S'^2 < 0 \implies |\Delta x'|>|c\Delta t'|\\
-        \Delta t=0=\gamma\left(\Delta t'+\frac{v}{c^2}\Delta x'\right) \implies \Delta x'=-\frac{c^2}{v}\Delta t'
+        \Delta t=0=\gamma\left(\Delta t'+\dfrac{v}{c^2}\Delta x'\right) \implies \Delta x'=-\dfrac{c^2}{v}\Delta t'
         \end{cases}
     \end{equation*}
     \begin{equation*}
@@ -316,7 +316,69 @@
 
 \subsection{Преобразование скорости}
 
-...
+Посмотрим, как меняется скорость при преобразовании Лоренца:
+
+\begin{equation*}
+    \begin{cases}
+    v_x=\dfrac{dx}{dt}\\
+    v_y=\dfrac{dy}{dt}\\
+    v_z=\dfrac{dz}{dt}
+    \end{cases}
+\end{equation*}
+
+\begin{equation}\label{eq:lorentz_vel}
+    \begin{cases}
+    v_x'=\dfrac{dx'}{dt'}=\dfrac{dx-vdt}{dt-v/c^2dx}=\dfrac{v_x-v}{1-vv_x/c^2}\\
+    v_y'=\dfrac{dy}{dt}=\dfrac{dy}{dt-v/c^2dx}=\dfrac{v_y/\gamma}{1-vv_x/c^2}\\
+    v_z'=\dfrac{dz}{dt}=\dfrac{dz}{dt-v/c^2dx}=\dfrac{v_z/\gamma}{1-vv_x/c^2}
+    \end{cases}
+    \xrightarrow{c\to\infty}\quad
+    \begin{cases}
+    v_x'=v_x-v\\
+    v_y'=v_y\\
+    v_z'=v_z
+    \end{cases}
+\end{equation}
+
+Пусть частица движется вдоль оси $x$ со скоростью $v_x=V$. Тогда
+
+\begin{equation*}
+    V'=v_x'=\dfrac{V-v}{1-vV/c^2}
+\end{equation*}
+
+Рассмотрим движение фотона: $V=c$. Тогда $V'=c=V$, что отражает постулат Эйнштейна: скорость света одинакова и равна $c$ в любой системе отсчёта. Этот результат можно было получить из сохранения интервала:
+
+\begin{equation*}
+    dS^2=c^2dt^2-\left(d\vec{r}\right)^2=dS'^2=c^2dt'^2-\left(d\vec{r}'\right)^2=0
+\end{equation*}
+\begin{equation*}
+    V'=\frac{d\vec{r}'}{dt'}=c=\frac{d\vec{r}}{dt}=V
+\end{equation*}
+
+Рассмотрим движение частицы в плоскости $XY$:
+
+\begin{equation*}
+    \begin{cases}
+    v_x=v\cos{\theta}\\
+    v_y=v\sin{\theta}\\
+    v_x'=v'\cos{\theta'}\\
+    v_y'=v'\sin{\theta'}
+    \end{cases}
+\end{equation*}
+\begin{equation*}
+    \tan{\theta'}=\dfrac{v_y'}{v_x'}=\dfrac{\sqrt{1-\dfrac{V^2}{c^2}}v_y}{v_x-V}=\dfrac{\sqrt{1-\dfrac{V^2}{c^2}}v\sin{\theta}}{v\cos{\theta}-V}
+\end{equation*}
+Изменение видимого направления при переходе к другой системе отсчёта называется аберрацией. При аберрации света ($v=c$):
+
+\begin{equation*}
+    \tan{\theta'}=\dfrac{\sqrt{1-\dfrac{V^2}{c^2}\sin{\theta}}}{\cos{\theta}-\dfrac{V}{c}}
+\end{equation*}
+
+Запишем компоненту скорости по оси $X$ с помощью \eqref{eq:lorentz_vel}:
+\begin{equation*}
+    c\cos{\theta'}=v_x'=\dfrac{c\cos{\theta'}-v}{1-\dfrac{v}{c}\cos{\theta}}
+    \implies \cos{\theta'}=\dfrac{\cos{\theta}-\dfrac{v}{c}}{1-\dfrac{v}{c}\cos{\theta}}
+\end{equation*}
 
 \subsection{Элементы векторного анализа}
 
@@ -421,13 +483,6 @@
 ...
 
 \subsection{Теорема Пойнтинга --- Умова}
-
-...
-
-%chapter
-\section{Постоянное электромагнитное поле}
-
-\subsection{Электрическое поле}
 
 ...
 
