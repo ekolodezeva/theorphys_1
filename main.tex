@@ -13,18 +13,14 @@
 
 \usepackage{hyperref}
 
-\author{
-  Колодезева Екатерина\\
-  \texttt{kolodezeva.ed@phystech.edu}
-}
 \title{Теория поля (Воронов) 2018/19}
-
+\author{}
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  Данный документ представляет собой конспект лекций по семестровому курсу теории поля в МФТИ, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ. На достоверность изложения и отсутствие ошибок не претендует. Последняя версия документа доступна по ссылке \url{https://github.com/ekolodezeva/theorphys_1}.
+  Это конспект лекций по семестровому курсу теории поля в МФТИ, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ. Может содержать смысловые ошибки и опечатки. Последняя версия документа тут --- \url{https://github.com/ekolodezeva/theorphys_1}, по поводу ошибок и опечаток пишите на \url{kolodezeva.ed@phystech.edu}.
 \end{abstract}
  
 \tableofcontents
@@ -382,6 +378,84 @@
 
 \subsection{Элементы векторного анализа}
 
+Рассмотрим произвольный вектор $\vec{r}$ в двух базисах (реперах) $\{\vec{e}_i\}$ и $\{\vec{e}_{i'}\}$:
+
+\begin{equation}\label{eq:bases}
+    \begin{cases}
+    \vec{r}=\tensor{x}{^i}\vec{e}_i=\tensor{x}{^{i'}}\vec{e}_{i'}\\
+    \vec{e}_{i'}=\tensor{R}{^i_{i'}}\vec{e}_i
+    \end{cases}
+\end{equation}
+
+Введём симметричный метрический тензор $\tensor{g}{_i_j}=\left(\vec{e}_i\vec{e}_j\right)$. В четырёхмерном пространстве Минковского этот тензор задаётся матрицей 
+
+\begin{equation*}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & -1 & 0 & 0 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & -1
+    \end{pmatrix},\quad
+    \tensor{g}{_i_j}\tensor{g}{^k^l}=\tensor{\delta}{^k_i}
+\end{equation*}
+
+Домножив второе уравнение системы \eqref{eq:bases} на $\vec{e}_k$, получим
+
+\begin{equation*}
+    \left(\vec{e}_{i'}\vec{e}_k\right)=\tensor{R}{^i_{i'}}\left(\vec{e}_i\vec{e}_k\right)=\tensor{g}{_i_k}\tensor{R}{^i_{i'}}
+\end{equation*}
+
+Домножив первое уравнение системы \eqref{eq:bases} на $\vec{e}_{j'}$, получим с учётом результата выше
+
+\begin{equation*}
+    \tensor{x}{^{i'}}\left(\vec{e}_{i'}\vec{e}_{j'}\right)=\tensor{x}{^{i'}}\tensor{g}{_{i'}_{j'}}=\tensor{x}{^i}\left(\vec{e}_i\vec{e}_{j'}\right)=\tensor{x}{^i}\tensor{g}{_i_j}\tensor{R}{^j_{j'}}
+\end{equation*}
+
+Домножим полученный результат на $\tensor{g}{^{k'}^{l'}}$ и переобозначим индексы:
+
+\begin{equation*}
+    \tensor{x}{^{i'}}\tensor{g}{_{i'}_{j'}}\tensor{g}{^{k'}^{l'}}=\tensor{x}{^{i'}}\tensor{\delta}{^{k'}_{i'}}=\tensor{x}{^{k'}}=\tensor{x}{^i}\tensor{g}{_i_j}\tensor{R}{^j_{j'}}\tensor{g}{^{k'}^{l'}}=\tensor{x}{^k}\tensor{g}{_i_k}\tensor{R}{^i_j}\tensor{g}{^j^{k'}}=\tensor{A}{^{k'}_k}\tensor{x}{^k}
+\end{equation*}
+
+Итак, при смене репера координаты преобразуются как 
+
+\begin{equation}\label{eq:coord_change}
+    \tensor{x}{^{k'}}=\tensor{A}{^{k'}_k}\tensor{x}{^k}
+\end{equation}
+
+\begin{enumerate}
+    \item Контравариантный вектор $\tensor{V}{^i}$ --- величина, которая при преобразовании координат \eqref{eq:coord_change} меняется как $\tensor{V}{^{i'}}=\tensor{A}{^{i'}_i}\tensor{V}{^i}=\dfrac{\partial \tensor{x}{^{i'}}}{\partial \tensor{x}{^i}}\tensor{V}{^i}$.
+    Эталонный контравариантный вектор --- дифференциал от вектора: $d\tensor{x}{^{i'}}=\dfrac{\partial \tensor{x}{^{i'}}}{\partial\tensor{x}{^i}} d\tensor{x}{^i}$.
+    \item Ковариантный вектор $\tensor{W}{_i}$ --- величина, которая при преобразовании координат \eqref{eq:coord_change} меняется как $\tensor{W}{_{i'}}=\tensor{A}{^i_{i'}}\tensor{W}{_i}=\dfrac{\partial\tensor{x}{^i}}{\partial\tensor{x}{^{i'}}}\tensor{W}{_i}$.
+    Эталонный контравариантный вектор --- производная скалярной функции $\Phi(x)=\Phi'(x')$: $\dfrac{\partial\Phi'}{\partial\tensor{x}{^{i'}}}=\dfrac{\partial\Phi}{\partial\tensor{x}{^i}}\dfrac{\partial\tensor{x}{^i}}{\partial\tensor{x}{^{i'}}}$. Действительно, при таком преобразовании скалярная функция не изменяется:
+    \begin{equation*}
+        d\Phi'=\dfrac{\partial\Phi'}{\partial\tensor{x}{^{i'}}}d\tensor{x}{^{i'}}=\dfrac{\partial\Phi}{\partial\tensor{x}{^i}}\dfrac{\partial\tensor{x}{^i}}{\partial\tensor{x}{^{i'}}}d\tensor{x}{^{i'}}=\dfrac{\partial\Phi}{\partial\tensor{x}{^i}}\dfrac{\partial\tensor{x}{^i}}{\partial\tensor{x}{^{i'}}}\dfrac{\partial\tensor{x}{^{i'}}}{\partial\tensor{x}{^{k}}}d\tensor{x}{^k}=
+    \end{equation*}
+    \begin{equation*}
+        =\dfrac{\partial\Phi}{\partial\tensor{x}{^i}}\dfrac{\partial\tensor{x}{^i}}{\partial\tensor{x}{^{k}}}d\tensor{x}{^k}=\dfrac{\partial\Phi}{\partial\tensor{x}{^i}}\tensor{\delta}{^i_k}d\tensor{x}{^k}=\dfrac{\partial\Phi}{\partial\tensor{x}{^i}}d\tensor{x}{^i}=d\Phi
+    \end{equation*}
+\end{enumerate}
+
+Видно, что свёртка ковариантного и контравариантного векторов инвариантна относительно системы отсчёта, то есть скаляр:
+
+\begin{equation*}
+    \tensor{W}{_{i'}}\tensor{V}{^{i'}}=\dfrac{\partial\tensor{x}{^i}}{\partial\tensor{x}{^{i'}}}\tensor{W}{_i}\dfrac{\partial \tensor{x}{^{i'}}}{\partial \tensor{x}{^i}}\tensor{V}{^i}=\tensor{W}{_i}\tensor{V}{^i}=inv
+\end{equation*}
+
+Тензоры второго ранга можно разделить на дважды контравариантные $\tensor{T}{^i^j}\sim\tensor{V}{^i}\tensor{V}{^j}$, дважды ковариантные $\tensor{T}{_k_l}\sim\tensor{W}{_k}\tensor{W}{_l}$ и единожды контравариантные, единожды ковариантные $\tensor{T}{^i_j}\sim\tensor{V}{^i}\tensor{W}{_j}$.
+
+Квадрат произвольного вектора выражается через дважды ковариантный метрический тензор:
+
+\begin{equation*}
+    \left(d\vec{r}\right)^2=\left(\vec{e}_i d\tensor{x}{^i}\vec{e}_j d\tensor{x}{^j}\right)=\left(\vec{e}_i\vec{e}_j\right)d\tensor{x}{^i}d\tensor{x}{^j}=\tensor{g}{_i_j}d\tensor{x}{^i}d\tensor{x}{^j}=\left(\tensor{g}{_i_j}d\tensor{x}{^i}\right)d\tensor{x}{^j}=d\tensor{x}{_j}d\tensor{x}{^j}
+\end{equation*}
+
+В трёхмерном случае 
+
+\begin{equation*}
+     \left(d\vec{r}\right)^2=dx^2+dy^2+dz^2=\tensor{g}{_\alpha_\beta}d\tensor{x}{^\alpha}d\tensor{x}{^\beta}
+\end{equation*}
+
 ...
 
 \subsection{Лагранжиан и действие для свободной точечной релятивистской частицы}
@@ -495,8 +569,8 @@
     \item
     \begin{equation*}
         \begin{cases}
-        E_{y'}=\tensor{F}{_{0'}_{y'}}=\tensor{F}{^{y'}^{0'}}=\gamma\left(\tensor{F}{^{y}^{0}}-\frac{v}{c}\tensor{F}{^{y}^{x}}\right)=E_y-\gamma\frac{v}{c}H_z\\
-        E_{z'}=\tensor{F}{_{0'}_{z'}}=\tensor{F}{^{z'}^{0'}}=\gamma\left(\tensor{F}{^{z}^{0}}-\frac{v}{c}\tensor{F}{^{z}^{x}}\right)=E_z+\gamma\frac{v}{c}H_y
+        E_{y'}=\tensor{F}{_{0'}_{y'}}=\tensor{F}{^{y'}^{0'}}=\gamma\left(\tensor{F}{^{y}^{0}}-\frac{v}{c}\tensor{F}{^{y}^{x}}\right)=\gamma\left(E_y-\frac{v}{c}H_z\right)\\
+        E_{z'}=\tensor{F}{_{0'}_{z'}}=\tensor{F}{^{z'}^{0'}}=\gamma\left(\tensor{F}{^{z}^{0}}-\frac{v}{c}\tensor{F}{^{z}^{x}}\right)=\gamma\left(E_z+\frac{v}{c}H_y\right)
         \end{cases}
     \end{equation*}
     \begin{equation*}
@@ -504,12 +578,21 @@
         \vec{E}_{\perp'}=\gamma\left(\vec{E}_\perp+\frac{1}{c}\lbrack\vec{v}\times\vec{H}\rbrack\right)
     \end{equation*}
     
-    \item ПОЛУЧИТЬ
+    \item
+    \begin{equation*}
+        H_{x'}=\tensor{e}{_{y'}_{z'}_{x'}}H_{x'}=\tensor{F}{^{y'}^{z'}}=\tensor{F}{^{y}^{z}}=\tensor{e}{_{y}_{z}_{x}}H_{x}=H_{x}
+    \end{equation*}
     \begin{equation*}
         \implies \vec{H}_{\parallel'}=\vec{H}_\parallel
     \end{equation*}
     
-    \item ПОЛУЧИТЬ
+    \item
+    \begin{equation*}
+        \begin{cases}
+        H_{y'}=\tensor{e}{_{z'}_{x'}_{y'}}H_{y'}=\tensor{F}{^{x'}^{z'}}=\tensor{F}{^{x
+        '}^{z}}=\gamma\left(\tensor{F}{^{x}^{z}}-\frac{v}{c}\tensor{F}{^{0}^{z}}\right)=\gamma\left(H_y+\frac{v}{c}E_z\right)\\
+        H_{z'}=\tensor{e}{_{x'}_{y'}_{z'}}H_{z'}=\tensor{F}{^{y'}^{x'}}=\tensor{F}{^{y}^{x'}}=\gamma\left(\tensor{F}{^{y}^{x}}-\frac{v}{c}\tensor{F}{^{y}^{0}}\right)=\gamma\left(H_z-\frac{v}{c}E_y\right)\end{cases}        
+    \end{equation*}
     \begin{equation*}
         \implies \vec{H}_{\perp'}=\gamma\left(\vec{H}_\perp-\frac{1}{c}\lbrack\vec{v}\times\vec{E}\rbrack\right)
     \end{equation*}
@@ -527,9 +610,22 @@
         \begin{equation*}
         =-2\vec{E}^2+2\vec{H}^2 \implies \tensor{F}{_i_k}\tensor{F}{^i^k}=2\left(H^2-E^2\right)
         \end{equation*}
-    \item ПОЛУЧИТЬ
+    \item
+    Будем раскладывать четырёхмерные индексы $i,j,k,l$ по правилу $\left(i,j,k,l\right)=\left(0,0,0,0\right)+\left(\alpha,\beta,\gamma,\delta\right)$ и сразу опускать нулевые слагаемые тензора $\tensor{e}{^i^j^k^l}$ в выкладках вида $\tensor{e}{^0^j^k^l}=\tensor{e}{^0^0^k^l}+\tensor{e}{^0^\beta^k^l}=\tensor{e}{^0^\beta^k^l}=\tensor{e}{^0^\beta^\gamma^\delta}$.
         \begin{equation*}
-            \implies \tensor{e}{^i^j^k^l}\tensor{F}{_i_j}\tensor{F}{_k_l}=-8\left(\vec{E}\vec{H}\right)
+            \tensor{e}{^i^j^k^l}\tensor{F}{_i_j}\tensor{F}{_k_l}=\left(\tensor{e}{^0^j^k^l}\tensor{F}{_0_j}+\tensor{e}{^\alpha^j^k^l}\tensor{F}{_\alpha_j}\right)\tensor{F}{_k_l}=\left(\tensor{e}{^0^\beta^k^l}\tensor{F}{_0_\beta}+\tensor{e}{^\alpha^0^k^l}\tensor{F}{_\alpha_0}+\tensor{e}{^\alpha^\beta^k^l}\tensor{F}{_\alpha_\beta}\right)\tensor{F}{_k_l}=
+        \end{equation*}
+        \begin{equation*}
+            =\tensor{e}{^0^\beta^\gamma^\delta}\tensor{F}{_\gamma_\delta}+\tensor{e}{^\alpha^0^\gamma^\delta}\tensor{F}{_\gamma_\delta}+\tensor{e}{^\alpha^\beta^0^\gamma}\tensor{F}{_0_\gamma}+\tensor{e}{^\alpha^\beta^\gamma^0}\tensor{F}{_\gamma_0}=-4E_b\tensor{e}{^0^\beta^\gamma^\delta}\tensor{F}{_\gamma_\delta}=
+        \end{equation*}
+        \begin{equation*}
+            =-4\left(E_1\left(\tensor{e}{^0^1^2^3}\tensor{F}{_2_3}+\tensor{e}{^0^1^3^2}\tensor{F}{_3_2}\right)+E_2\left(\tensor{e}{^0^2^3^1}\tensor{F}{_3_1}+\tensor{e}{^0^2^1^3}\tensor{F}{_1_3}\right)+E_3\left(\tensor{e}{^0^3^2^1}\tensor{F}{_2_1}+\tensor{e}{^0^3^1^2}\tensor{F}{_1_2}\right)\right)=
+        \end{equation*}
+        \begin{equation*}
+            =-4\left(2E_1H_1+2E_2H_2+2E_3H_3\right)=-8\vec{E}\vec{H}
+        \end{equation*}
+        \begin{equation*}
+            \implies \tensor{e}{^i^j^k^l}\tensor{F}{_i_j}\tensor{F}{_k_l}=-8\vec{E}\vec{H}
         \end{equation*}
 \end{enumerate}
 
