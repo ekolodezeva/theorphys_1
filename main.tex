@@ -10,8 +10,13 @@
 \usepackage{mathtools}
 \usepackage{tensor}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[shortlabels]{enumitem}
 
 \usepackage{hyperref}
+
+
 
 \title{Теория поля (Воронов) 2018/19}
 \author{}
@@ -20,7 +25,7 @@
 \maketitle
 
 \begin{abstract}
-  Это конспект лекций по семестровому курсу теории поля в МФТИ, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ. Может содержать смысловые ошибки и опечатки. Последняя версия документа тут --- \url{https://github.com/ekolodezeva/theorphys_1}, по поводу ошибок и опечаток пишите на \url{kolodezeva.ed@phystech.edu}.
+  Это конспект лекций по курсу теории поля, прочитанному Вороновым Николаем Александровичем осенью 2018/19 учебного года студентам третьего курса ФАКИ МФТИ. О смысловых ошибках и опечатках пишите сюда --- \url{https://vk.com/ekolodezeva}. Актуальная версия тут --- \url{https://github.com/ekolodezeva/theorphys_1}.
 \end{abstract}
  
 \tableofcontents
@@ -184,8 +189,8 @@
 
 \begin{equation*}
     \begin{cases}
-    dx'=\dfrac{1}{\sqrt{V^2-c^2}}\big(dx+Vdt\big)\\
-    dt'=\dfrac{1}{\sqrt{V^2-c^2}}\big(\dfrac{V}{c^2}dx+dt\big)
+    dx'=\dfrac{1}{\sqrt{V^2-c^2}}\left(dx+Vdt\right)\\
+    dt'=\dfrac{1}{\sqrt{V^2-c^2}}\left(\dfrac{V}{c^2}dx+dt\right)
     \end{cases}
 \end{equation*}
 
@@ -250,7 +255,7 @@
     \begin{cases}
     \Delta S_{12}^2=\Delta S_{1'2'}^2\\
     \Delta S_{1'2'}^2=c^2\Delta t'^2\\
-    \Delta S_{12}^2=c^2\Delta t^2-\Delta x^2=c^2\Delta t^2-v^2\Delta t^2=c^2\Delta t^2\big(1-\dfrac{v^2}{c^2}\big)
+    \Delta S_{12}^2=c^2\Delta t^2-\Delta x^2=c^2\Delta t^2-v^2\Delta t^2=c^2\Delta t^2\left(1-\dfrac{v^2}{c^2}\right)
     \end{cases}
     \implies \Delta t=\gamma\Delta t'
 \end{equation*}
@@ -450,17 +455,221 @@
     \left(d\vec{r}\right)^2=\left(\vec{e}_i d\tensor{x}{^i}\vec{e}_j d\tensor{x}{^j}\right)=\left(\vec{e}_i\vec{e}_j\right)d\tensor{x}{^i}d\tensor{x}{^j}=\tensor{g}{_i_j}d\tensor{x}{^i}d\tensor{x}{^j}=\left(\tensor{g}{_i_j}d\tensor{x}{^i}\right)d\tensor{x}{^j}=d\tensor{x}{_j}d\tensor{x}{^j}
 \end{equation*}
 
-В трёхмерном случае 
+В трёхмерном случае:
+
+\begin{enumerate}
+    \item
+    Метрический тензор задаётся единичной матрицей:
+    \begin{equation*}
+    \tensor{g}{_\alpha_\beta}=
+    \begin{cases}
+        1,\quad\alpha=\beta\\
+        0,\quad\alpha\ne\beta
+    \end{cases}
+    \end{equation*}
+
+    \item
+    Квадрат вектора --- инвариант относительно системы отсчёта как свёртка ковариантного и контравариантного векторов:
+    \begin{equation*}
+     \left(d\vec{r}\right)^2=dx^2+dy^2+dz^2=\tensor{g}{_\alpha_\beta}d\tensor{x}{^\alpha}d\tensor{x}{^\beta}=d\tensor{x}{^\alpha}d\tensor{x}{_\alpha}=inv
+    \end{equation*}
+    
+    \item
+    Так как $\tensor{A}{^\alpha}\tensor{g}{_\alpha_\beta}=\tensor{A}{_\beta}$, то $\tensor{A}{_\alpha}=\tensor{A}{^\alpha}$ для всех векторов.
+\end{enumerate}
+
+Вернёмся к четырёхмерному неевклидовому пространству Минковского. Квадрат длины вектора $\tensor{x}{^i}=(ct,\vec{r})=(x_0,x^\alpha)$ задаётся как $ds^2=c^2dt^2-(d\vec{r})^2=\tensor{\eta}{_i_j}d\tensor{x}{^i}d\tensor{x}{^j}$, где $\tensor{\eta}{_i_j}$ --- метрический тензор.
+В этом пространстве существует система координат, в которой метрический тензор диагонален (но не обязательно задаётся единичной матрицей):
 
 \begin{equation*}
-     \left(d\vec{r}\right)^2=dx^2+dy^2+dz^2=\tensor{g}{_\alpha_\beta}d\tensor{x}{^\alpha}d\tensor{x}{^\beta}
+    \tensor{\eta}{_i_j}=
+    \begin{cases}
+    1,\quad i=j=0\\
+    -1,\quad i=j=\alpha\\
+    0,\quad i\ne j
+    \end{cases},\quad\sum_i\tensor{\eta}{_i_i}=-2
 \end{equation*}
 
-...
+Для всех векторов верно
+\begin{equation*}
+    d\tensor{x}{_i}=\tensor{\eta}{_i_j}d\tensor{x}{^j}\implies
+    \begin{cases}
+    d\tensor{x}{_0}=d\tensor{x}{^0}\\
+    d\tensor{x}{_\alpha}=-d\tensor{x}{^\alpha}
+    \end{cases}
+    \implies
+    \begin{cases}
+    \tensor{A}{_0}=\tensor{A}{^0}\\
+    \tensor{A}{_\alpha}=-\tensor{A}{^\alpha}
+    \end{cases}
+\end{equation*}
+
+Положение точечной частицы $d\tensor{x}{^i}$ и её четырехскорость $\tensor{u}{^i}=\dfrac{d\tensor{x}{^i}}{ds}$ --- контравариантные векторы.
+
+Рассмотрим траекторию точечной частицы как функцию собственного времени $s$:
+
+\begin{equation*}
+    \begin{cases}
+    ct=ct(s)\\
+    \vec{r}=\vec{r}(s)
+    \end{cases}
+\end{equation*}
+
+Понятие собственного времени частицы имеет смысл только для времениподобных траекторий ($ds^2>0$). Для таких значений интервалов скорость $\tensor{u}{^i}$ задает траекторию, по которой движется частица. Квадрат модуля скорости
+
+\begin{equation}\label{eq:velocity_sq}
+    \left(\tensor{u}{^i}\right)^2=\tensor{\eta}{_i_j}\tensor{u}{^i}\tensor{u}{^j}=\tensor{\eta}{_i_j}\dfrac{d\tensor{x}{^i}}{ds}\dfrac{d\tensor{x}{^j}}{ds}=\dfrac{\tensor{\eta}{_i_j}d\tensor{x}{^i}d\tensor{x}{^j}}{ds^2}=1
+\end{equation}
+
+Замечание: формально выражение $ \left(\tensor{u}{^i}\right)^2=\tensor{\eta}{_i_j}\tensor{u}{^i}\tensor{u}{^j}$ неверно, но здесь и дальше для удобства квадрат модуля вектора обозначается как $\left(\cdot\right)^2$.
+
+\begin{equation*}
+    \begin{cases}
+    \tensor{u}{^0}=\dfrac{d\tensor{x}{^0}}{ds}=\dfrac{cdt}{cdt\sqrt{1-\frac{v^2}{c^2}}}=\gamma\\
+    \tensor{u}{^\alpha}=\dfrac{d\tensor{x}{^\alpha}}{ds}=\dfrac{d\tensor{x}{^\alpha}}{cdt\sqrt{1-\frac{v^2}{c^2}}}=\dfrac{\tensor{v}{^\alpha}}{c}\gamma
+    \end{cases}\implies\tensor{u}{^i}=\left(\gamma,\dfrac{\vec{v}}{c}\gamma\right)
+\end{equation*}
+
+Аналогично четырехскорости вводится четырехускорение
+
+\begin{equation*}
+    \tensor{w}{^i}=\dfrac{d^2\tensor{x}{^i}}{ds^2}=\dfrac{d\tensor{u}{^i}}{ds}
+\end{equation*}
+
+Продифференцировав \eqref{eq:velocity_sq}, получаем $\tensor{u}{_i}\tensor{w}{^i}=0$.
+
+Квадрат модуля четырёхускорения $\tensor{\eta}{_i_j}\tensor{w}{^i}\tensor{w}{^j}$ положителен.
 
 \subsection{Лагранжиан и действие для свободной точечной релятивистской частицы}
 
-...
+В классической механике действие частицы по некоторой траектории есть функция обобщенных координат и их производных:
+\begin{equation*}
+    S=S\left(q,\dot{q}\right)=\int\mathscr{L}dt
+\end{equation*}
+Лагранжиан $\mathscr{L}$ удовлетворяет уравнению Эйлера --- Лагранжа:
+\begin{equation}\label{eq:euler}
+    \dfrac{d}{dt}\left(\dfrac{\partial\mathscr{L}}{\partial\dot{q}}\right)-\dfrac{\partial\mathscr{L}}{\partial q}=0
+\end{equation}
+
+Минимум или максимум действия достигается при $\delta S=0$, минимум действия соответствует траектории частицы.
+
+Параметры точечной релятивистской частицы в пространстве Минковского --- $ds,\tensor{u}{^i},\tensor{w}{^i}$. Попробуем составить формулу действия, инвариантного относительно преобразований Лоренца. Очевидно, действие --- это какая-то комбинация указанных выше параметров:
+
+\begin{equation}\label{S_before}
+    S=\int ds\left(a+b\tensor{u}{^i}\tensor{u}{_i}+d\tensor{u}{^i}\tensor{w}{_i}+f\tensor{w}{^i}\tensor{w}{_i}\right)=inv,\quad a,b,d,f\in\mathbb{R}
+\end{equation}
+
+Рассмотрим слагаемые в \eqref{S_before}:
+\begin{enumerate}
+    \item 
+    $\tensor{u}{^i}\tensor{u}{_i}=1$ --- отбрасываем, так как слагаемое с константой уже есть.
+    \item
+    $\tensor{u}{^i}\tensor{w}{_i}=0$
+    \item
+    $\tensor{w}{^i}\tensor{w}{_i}=\dfrac{d\tensor{u}{^i}}{ds}\dfrac{d\tensor{u}{_i}}{ds}=\dfrac{d\tensor{u}{^0}}{ds}\dfrac{d\tensor{u}{_0}}{ds}+\dfrac{d\tensor{u}{^\alpha}}{ds}\dfrac{d\tensor{u}{_\alpha}}{ds}=\left(\dfrac{d\tensor{u}{^0}}{ds}\right)^2-\left(\dfrac{d\tensor{u}{^\alpha}}{ds}\right)^2$
+    \begin{enumerate}[a)]
+    \item
+    $\left(\dfrac{d\tensor{u}{^0}}{ds}\right)^2=\left(\dfrac{d\gamma}{\frac{cdt}{\gamma}}\right)^2=\dfrac{\gamma^2}{c^2}\left(\dfrac{d\gamma}{dt}\right)^2=\dfrac{\gamma^8}{c^2}\left(\dfrac{v\dot{v}}{c^2}\right)^2$
+    \item
+    $\left(\dfrac{d\tensor{u}{^\alpha}}{ds}\right)^2=\left(\dfrac{d\left(\gamma\frac{\tensor{v}{_\alpha}}{c}\right)}{\frac{cdt}{\gamma}}\right)^2=\dfrac{\gamma^2}{c^4}\left(\dfrac{d\left(\gamma\tensor{v}{_\alpha}\right)}{dt}\right)^2=$
+    
+    $=\dfrac{\gamma^2}{c^4}\left(\gamma\dot{\tensor{v}{_\alpha}}+\tensor{v}{_\alpha}\gamma^3\dfrac{v\dot{v}}{c^2}\right)^2=\dfrac{\gamma^4}{c^2}\left(\dfrac{\dot{v}}{c}\right)^2+\dfrac{2\gamma^6}{c^2}\left(\dfrac{v\dot{v}}{c^2}\right)^2+\dfrac{\gamma^8}{c^2}\left(\dfrac{v^2\dot{v}}{c^3}\right)^2$
+    \end{enumerate}
+    $\tensor{w}{^i}\tensor{w}{_i}=\dfrac{\gamma^8}{c^2}\left(\dfrac{v\dot{v}}{c^2}\right)^2-\dfrac{\gamma^4}{c^2}\left(\dfrac{\dot{v}}{c}\right)^2-\dfrac{2\gamma^6}{c^2}\left(\dfrac{v\dot{v}}{c^2}\right)^2-\dfrac{\gamma^8}{c^2}\left(\dfrac{v^2\dot{v}}{c^3}\right)^2$
+    
+    При переходе к классической механике $c\to\infty,v/c\to0,\gamma\to1 \implies \tensor{w}{^i}\tensor{w}{_i}\to-\dfrac{\dot{v}^2}{c^4}$. Но действие $S=S\left(q,\dot{q}\right)$ не может содержать вторую производную $\dot{v}$ обобщенной координаты, поэтому это слагаемое тоже выкидываем. 
+\end{enumerate}
+
+Остается только слагаемое и условие сшивки с классической теорией:
+\begin{equation*}
+    \begin{cases}
+    S=\int ads=\int \dfrac{cdt}{\gamma}a\\ \lim_{c\to\infty}S=\int\mathscr{L}dt=\int\dfrac{mv^2}{2}dt
+    \end{cases}
+\end{equation*}
+
+Раскладывая в ряд Тейлора, получаем
+
+\begin{equation*}
+    \lim_{c\to\infty}ac\sqrt{1-\frac{v^2}{c^2}}=\lim_{c\to\infty}ac\left(1-\frac{v^2}{2c^2}+...\right)=\frac{mv^2}{2}\implies a=-mc
+\end{equation*}
+\begin{equation}\label{eq:S_after}
+    S=-mc\int ds
+\end{equation}
+
+Рассмотрим парадокс двух (точечных) близнецов. Пусть есть две частицы $a, b$, двигающиеся из точки $\left(t_1,\vec{r}_1\right)$ в точку $\left(t_2,\vec{r}_2\right)$, при этом частица $a$ двигается по прямой, соединяющей эти точки, а частица $b$ --- по более длинной извилистой траектории. Собственное время обоих частиц
+\begin{equation*}
+    \begin{cases}
+    c\tau_a=c\left(t_2-t_1\right)\\
+    c\tau_b=\int_{t_1}^{t_2}ds=c\int_{t_1}^{t_2}\dfrac{dt}{\gamma}<c\left(t_2-t_1\right)
+    \end{cases}\implies \tau_b<\tau_a
+\end{equation*}
+
+Если вместо точечных частиц взять двух близнецов, один из которых летит в космическом корабле, а второй живет на Земле, то это неравенство означает, что в момент встречи второй близнец окажется старше.
+
+Вернёмся к уравнению Эйлера --- Лагранжа \eqref{eq:euler}. Введём четырехимпульс частицы $\tensor{p}{^i}=mc\tensor{u}{^i}=\left(\gamma mc, \gamma m\vec{v}\right)$. Тогда
+
+\begin{equation*}
+    \begin{cases}
+    \tensor{p}{_\alpha}=\dfrac{\partial\mathscr{L}}{\partial\dot{q}}=\dfrac{\partial\mathscr{L}}{\partial\tensor{v}{_\alpha}}=m\tensor{v}{_\alpha}\\
+    \varepsilon=\tensor{v}{_\alpha}\dfrac{\partial\mathscr{L}}{\partial\tensor{v}{_\alpha}}-\mathscr{L}=\gamma mc^2
+    \end{cases}\implies \tensor{p}{^i}=\left(\frac{\varepsilon}{c}, \vec{p}\right)
+\end{equation*}
+
+\begin{equation*}
+    \tensor{\eta}{_i_j}\tensor{p}{^i}\tensor{p}{^j}=\tensor{\eta}{_i_j}mc\tensor{u}{^i}mc\tensor{u}{^j}=mc^2=\tensor{p}{_0}^2-\left(\vec{p}\right)^2=\dfrac{\varepsilon^2}{c^2}-\left(\vec{p}\right)^2
+    \implies \varepsilon^2=p^2c^2+m^2c^4
+\end{equation*}
+
+Найдем минимальную траекторию движения частицы, используя \eqref{eq:S_after}:
+
+\begin{equation*}
+    \begin{cases}
+    S=-mc\int ds\\
+    \delta S=0\\
+    \delta ds=\delta\left(\sqrt{\tensor{\eta}{_i_j}d\tensor{x}{^i}d\tensor{x}{^j}}\right)=\dfrac{2d\tensor{x}{^i}\delta d\tensor{x}{_i}}{2ds}=\tensor{u}{^i}\delta d\tensor{x}{_i}=\tensor{u}{^i}d\delta\tensor{x}{_i}
+    \end{cases}
+\end{equation*}
+
+Подставляя и интегрируя по частям, получаем
+
+\begin{equation*}
+    \delta S=-mc\int\delta dS=-mc\int\tensor{u}{^i}d\delta\tensor{x}{_i}=-mc\tensor{u}{^i}\delta\tensor{x}{_i}\Biggm\vert_1^2+mc\int\delta\tensor{x}{_i}d\tensor{u}{^i}=0
+\end{equation*}
+
+Вариация $\delta\tensor{x}{^i}$ равна нулю на концах любой траектории, значит, остаётся только второе слагаемое:
+
+\begin{equation*}
+    \delta S=mc\int\delta\tensor{x}{_i}d\tensor{u}{^i}=mc\int\delta\tensor{x}{_i}\dfrac{d\tensor{u}{^i}}{ds}ds=\int\delta\tensor{x}{^i}\dfrac{d\tensor{p}{^i}}{ds}ds=0
+\end{equation*}
+
+Так как $\delta S=0$ при любых вариациях  $\delta\tensor{x}{^i}$, то и подынтегральное выражение равно нулю. Получаем закон сохранения энергии и импульса свободной частицы:
+
+\begin{equation}
+    \dfrac{d\tensor{p}{^i}}{ds}=0
+\end{equation}
+
+По принципу суперпозиции у системы невзаимодействующих частиц сохраняется четырехимпульс. На примере двух частиц: $\tensor{p}{^i}=\tensor{p}{^i_1}+\tensor{p}{^i_2}$.
+
+Этот результат можно получить из уравнения \eqref{eq:euler}. Предположим, что потенциальная энергия системы зависит только от расстояния между частицами, но не от их координат:
+
+\begin{equation*}
+    \begin{cases}
+    U=U\left(\abs{\tensor{q}{^i_1}-\tensor{q}{^i_2}}\right)\\
+    T=T_1+T_2\\
+    \tensor{p}{^i}=\dfrac{\partial\mathscr{L}}{\partial t}=\tensor{\dot{q}}{^i}\\
+    \dfrac{d}{dt}\left(\dfrac{\partial\mathscr{L}}{\partial\dot{q}}\right)=\dfrac{\partial\mathscr{L}}{\partial q}
+    \end{cases}\implies
+    \begin{cases}
+    \dfrac{d\tensor{p}{^i_1}}{dt}=\dfrac{\partial\mathscr{L}}{\partial\tensor{q}{^i_1}}=\dfrac{\partial\mathscr{L}}{\partial q_{12}}\dfrac{\tensor{\left(q_1-q_2\right)}{^i}}{q_{12}}\\
+    \dfrac{d\tensor{p}{^i_2}}{dt}=\dfrac{\partial\mathscr{L}}{\partial\tensor{q}{^i_2}}=\dfrac{\partial\mathscr{L}}{\partial q_{12}}\dfrac{\tensor{\left(q_2-q_1\right)}{^i}}{q_{12}}=-\dfrac{d\tensor{p}{^i_1}}{dt}
+    \end{cases}
+\end{equation*}
+\begin{equation*}
+    \implies
+    \dfrac{d}{dt}\tensor{\left(p_1+p_2\right)}{^i}=0
+\end{equation*}
+
+Если система не изолированная, то есть $U=U_0\left(\abs{\tensor{q}{^i_1}-\tensor{q}{^i_2}}\right)+U_1\left(q_1,t\right)+U_2\left(q_2,t\right)$, то суммарный четырехимпульс системы не сохраняется.
 
 %chapter
 \section{Заряд в электромагнитном поле}
@@ -499,7 +708,7 @@
 
 \begin{equation*}
     \begin{split}
-        \frac{d}{ds}\big(\tensor{\eta}{_i_k}\tensor{u}{^i}\tensor{u}{^k}\big)=\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}+\tensor{\eta}{_i_k}\tensor{u}{^i}\frac{d\tensor{u}{^k}}{ds}=\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}+\tensor{\eta}{_k_i}\tensor{u}{^k}\frac{d\tensor{u}{^i}}{ds}=\\
+        \frac{d}{ds}\left(\tensor{\eta}{_i_k}\tensor{u}{^i}\tensor{u}{^k}\right)=\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}+\tensor{\eta}{_i_k}\tensor{u}{^i}\frac{d\tensor{u}{^k}}{ds}=\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}+\tensor{\eta}{_k_i}\tensor{u}{^k}\frac{d\tensor{u}{^i}}{ds}=\\
         =2\tensor{\eta}{_i_k}\frac{d\tensor{u}{^i}}{ds}\tensor{u}{^k}=2\frac{d\tensor{u}{^i}}{ds}\tensor{u}{_i}=0
     \end{split}
 \end{equation*}
@@ -518,18 +727,18 @@
     mc\frac{d\tensor{u}{^0}}{ds}=\frac{d\left(mc\tensor{u}{^0}\right)}{ds}=\frac{d\left(\varepsilon/c\right)}{ds}=\frac{1}{c}\frac{d\varepsilon}{dt}\frac{dt}{ds}=\Biggm\lvert\frac{ds}{dt}=\frac{\sqrt{c^2dt^2-d\vec{r}^2}}{dt}=\sqrt{c^2-v^2}=\frac{c}{\gamma}\Biggm\rvert=
 \end{equation*}
 \begin{equation*}
-    =\frac{\gamma}{c^2}\frac{d\varepsilon}{dt}=\frac{e}{c}\tensor{F}{^0^k}\tensor{u}{_k}=\frac{e}{c}\big(\tensor{F}{^0^0}\tensor{u}{_0}-\tensor{F}{^0^\alpha}\tensor{u}{_\alpha}\big)    =-\frac{e}{c}\left(-E_\alpha\right)\frac{v_\alpha\gamma}{c}=\frac{\gamma e}{c^2}\left(\vec{E}\vec{v}\right)
+    =\frac{\gamma}{c^2}\frac{d\varepsilon}{dt}=\frac{e}{c}\tensor{F}{^0^k}\tensor{u}{_k}=\frac{e}{c}\left(\tensor{F}{^0^0}\tensor{u}{_0}-\tensor{F}{^0^\alpha}\tensor{u}{_\alpha}\right)    =-\frac{e}{c}\left(-E_\alpha\right)\frac{v_\alpha\gamma}{c}=\frac{\gamma e}{c^2}\vec{E}\vec{v}
 \end{equation*}
 
 \begin{equation}\label{eq:emovement}
-    \frac{d\varepsilon}{dt}=e\left(\vec{E}\vec{v}\right)
+    \frac{d\varepsilon}{dt}=e\vec{E}\vec{v}
 \end{equation}
 
 \begin{equation*}
-    mc\frac{d\tensor{u}{^\alpha}}{ds}=\frac{d\left(mc\tensor{u}{^\alpha}\right)}{ds}=\frac{dp}{ds}=\frac{\gamma}{c}\frac{dp}{dt}=\frac{e}{c}\tensor{F}{^\alpha^k}\tensor{u}{_k}=\frac{e}{c}\big(\tensor{F}{^\alpha^0}\tensor{u}{_0}-\tensor{F}{^\alpha^\beta}\tensor{u}{_\beta}\big)=
+    mc\frac{d\tensor{u}{^\alpha}}{ds}=\frac{d\left(mc\tensor{u}{^\alpha}\right)}{ds}=\frac{dp}{ds}=\frac{\gamma}{c}\frac{dp}{dt}=\frac{e}{c}\tensor{F}{^\alpha^k}\tensor{u}{_k}=\frac{e}{c}\left(\tensor{F}{^\alpha^0}\tensor{u}{_0}-\tensor{F}{^\alpha^\beta}\tensor{u}{_\beta}\right)=
 \end{equation*}
 \begin{equation*}
-    =\frac{e}{c}\big(E_\alpha\gamma-\tensor{e}{_\gamma_\alpha_\beta}\tensor{H}{_\alpha}\tensor{v}{_\beta}\frac{\gamma}{c}\big)=\frac{\gamma}{c}\big(eE_\alpha+\frac{e}{c}\left(\lbrack\vec{v}\times\vec{H}\rbrack\right)_\alpha\big)
+    =\frac{e}{c}\left(E_\alpha\gamma-\tensor{e}{_\gamma_\alpha_\beta}\tensor{H}{_\alpha}\tensor{v}{_\beta}\frac{\gamma}{c}\right)=\frac{\gamma}{c}\left(eE_\alpha+\frac{e}{c}\left(\lbrack\vec{v}\times\vec{H}\rbrack\right)_\alpha\right)
 \end{equation*}
 
 \begin{equation}\label{eq:hmovement}
@@ -667,17 +876,11 @@
 
 \begin{enumerate}
     \item 
-    \begin{equation*}
-        \int_V\frac{\partial w}{\partial t}dV=\frac{\partial}{\partial t}\int_V wdV=\frac{\partial}{\partial t}W
-    \end{equation*}
+    $\int_V\dfrac{\partial w}{\partial t}dV=\dfrac{\partial}{\partial t}\int_V wdV=\dfrac{\partial}{\partial t}W$
     \item
-    \begin{equation*}
-        \int_V div\vec{S}dV=\oint_V \vec{S}d\vec{\sigma}
-    \end{equation*}
+    $\int_V div\vec{S}dV=\oint_V \vec{S}d\vec{\sigma}$
     \item
-    \begin{equation*}
-        \int_V \vec{j}(\vec{r}_a)\vec{E}(\vec{r}_a)=-\sum_a e_a \vec{v}_a \vec{E}(\vec{r}_a)=-\sum_a\frac{d\varepsilon_a}{dt}=-\frac{d\varepsilon}{dt}
-    \end{equation*}
+    $\int_V \vec{j}(\vec{r}_a)\vec{E}(\vec{r}_a)=-\sum_a e_a \vec{v}_a \vec{E}(\vec{r}_a)=-\sum_a\dfrac{d\varepsilon_a}{dt}=-\dfrac{d\varepsilon}{dt}$
 \end{enumerate}
 
 Получаем уравнение Пойнтинга --- Умова в интегральной форме:
